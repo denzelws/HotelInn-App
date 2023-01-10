@@ -1,7 +1,11 @@
 import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
 import mongoose  from 'mongoose'
+
 import authRoute from './routes/auth'
+import hotelsRoute from './routes/hotels'
+import roomsRoute from './routes/rooms'
+import usersRoute from './routes/users'
 
 const app = express()
 dotenv.config()
@@ -24,7 +28,12 @@ app.get('/', (req: Request, res: Response) => {
     res.send('first request')
 })
 
+app.use(express.json())
+
 app.use('/api/auth', authRoute)
+app.use('/api/hotels', hotelsRoute)
+app.use('/api/rooms', roomsRoute)
+app.use('/api/users', usersRoute)
 
 app.listen(8800, () => {
     connectToDatabase()
