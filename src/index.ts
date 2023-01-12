@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
 import mongoose  from 'mongoose'
+import cookieParser from 'cookie-parser'
 
 import authRoute from './routes/auth'
 import hotelsRoute from './routes/hotels'
@@ -28,6 +29,7 @@ app.get('/', (req: Request, res: Response) => {
     res.send('first request')
 })
 
+app.use(cookieParser())
 app.use(express.json())
 
 app.use('/api/auth', authRoute)
