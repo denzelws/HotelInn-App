@@ -1,3 +1,4 @@
+import 'express-async-errors'
 import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
 import mongoose  from 'mongoose'
@@ -7,6 +8,7 @@ import authRoute from './routes/auth'
 import hotelsRoute from './routes/hotels'
 import roomsRoute from './routes/rooms'
 import usersRoute from './routes/users'
+import { errorMiddleware } from './middleware/error'
 
 const app = express()
 dotenv.config()
@@ -25,12 +27,9 @@ mongoose.connection.on('disconnected', () => {
     console.log('mongoDB disconnected!')  
   })
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('first request')
-})
-
 app.use(cookieParser())
 app.use(express.json())
+app.use(errorMiddleware)
 
 app.use('/api/auth', authRoute)
 app.use('/api/hotels', hotelsRoute)
