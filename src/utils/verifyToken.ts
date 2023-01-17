@@ -24,21 +24,21 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
   }
 
 export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
-    verifyToken(req, res, () => {
+    verifyToken(req, res,next), () => {
         if((req as CustomRequest).user.id === req.params.id || req.params.isAdmin) {
           next()
         }  else {
           throw new ForbiddenError('Você não está autorizado!')
         }
-    })
+    }
 }
 
 export const verifyAdmin = (req: Request, res: Response, next: NextFunction) => {
-  verifyToken(req, res, () => {
+  verifyToken(req, res,next), () => {
       if((req as CustomRequest).user.isAdmin) {
         next()
       }  else {
         throw new ForbiddenError('Você não está autorizado!')
       }
-  })
+  }
 }
