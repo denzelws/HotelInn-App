@@ -1,6 +1,13 @@
 import { NextFunction, Request, Response } from "express"
 import Hotel from "../models/Hotel"
 
+interface CitiesQuery {
+cities: string
+list: [cities: string]
+}
+
+type CitiesRequest = Request<{}, any, any, CitiesQuery>
+
 export const createHotel = async (req: Request, res: Response, next: NextFunction) => {
 
     const newHotel = new Hotel(req.body)
@@ -39,3 +46,12 @@ export const getAllHotels = async (req: Request, res: Response, next: NextFuncti
       const hotels = await Hotel.find()   
       res.status(200).json(hotels)
 }
+
+export const countByCity = async (req: CitiesRequest, res: Response, next: NextFunction) => {
+      const cities = req.query.cities.split(",")
+      const list = await Promise.all(cities.map(city => {
+            return Hotel.countDocuments({city:city})
+      })) 
+      res.status(200).json(list)
+}
+
