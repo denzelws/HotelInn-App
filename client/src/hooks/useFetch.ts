@@ -9,12 +9,8 @@ const useFetch = (url: string) => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
-      try {
-        const res = await axios.get(url)
-        setData(res.data)
-      } catch (e: any) {
-        setError(e)
-      }
+      const res = await axios.get(url)
+      setData(res.data)
       setLoading(false)
     }
 
@@ -23,12 +19,10 @@ const useFetch = (url: string) => {
 
   const reFetchData = async () => {
     setLoading(true)
-    try {
-      const res = await axios.get(url)
-      setData(res.data)
-    } catch (e: any) {
-      setError(e)
-    }
+
+    const res = await axios.get(url)
+    setData(res.data)
+
     setLoading(false)
   }
   return { data, loading, error, reFetchData }
