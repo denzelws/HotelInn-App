@@ -19,7 +19,9 @@ const Highlight = () => {
             />
             <S.HighlightTitles>
               <S.Title>Madrid</S.Title>
-              <S.Description>{data[0]} propriedades</S.Description>
+              <S.Description>
+                <>{data[1]} propriedade</>
+              </S.Description>
             </S.HighlightTitles>
           </S.HighlightItem>
 
@@ -30,7 +32,9 @@ const Highlight = () => {
             />
             <S.HighlightTitles>
               <S.Title>Berlin</S.Title>
-              <S.Description>{data[1]} propriedade</S.Description>
+              <S.Description>
+                <>{data[1]} propriedade</>
+              </S.Description>
             </S.HighlightTitles>
           </S.HighlightItem>
 
@@ -41,7 +45,9 @@ const Highlight = () => {
             />
             <S.HighlightTitles>
               <S.Title>Londres</S.Title>
-              <S.Description>{data[2]} propriedade</S.Description>
+              <S.Description>
+                <>{data[1]} propriedade</>
+              </S.Description>
             </S.HighlightTitles>
           </S.HighlightItem>
         </>

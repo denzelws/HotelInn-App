@@ -1,8 +1,13 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
+export type DataProps = {
+  count: number
+  type: string
+}
+
 const useFetch = (url: string) => {
-  const [data, setData] = useState([])
+  const [data, setData] = useState<DataProps[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
@@ -11,6 +16,7 @@ const useFetch = (url: string) => {
       setLoading(true)
       const res = await axios.get(url)
       setData(res.data)
+
       setLoading(false)
     }
 
