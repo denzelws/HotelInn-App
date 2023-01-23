@@ -25,6 +25,7 @@ export const PropertyDescription = styled.div``
 
 export const Title = styled.h1`
   font-size: 1.8rem;
+  text-transform: capitalize;
 `
 
 export const Description = styled.h2`
