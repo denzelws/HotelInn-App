@@ -33,13 +33,6 @@ const PropertyList = () => {
       )}
     </S.Property>
   )
-
-  //   <S.PropertyDescription key={i}>
-  //   <S.Title>{data[i]?.type}</S.Title>
-  //   <S.Description>
-  //     {data[i].count} {data[i].type}
-  //   </S.Description>
-  // </S.PropertyDescription>
 }
 
 export default PropertyList
