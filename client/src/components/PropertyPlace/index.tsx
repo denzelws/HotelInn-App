@@ -1,6 +1,10 @@
 import * as S from './styles'
 
+import useFetch from '../../hooks/useFetch'
+
 const PropertyPlace = () => {
+  const { data, loading, error } = useFetch('/api/hotels/countByType')
+
   return (
     <S.PropertyPlace>
       <S.PropertyPlaceItem>

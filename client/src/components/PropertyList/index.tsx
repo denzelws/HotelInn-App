@@ -1,4 +1,4 @@
-import useFetch, { DataProps } from '../../hooks/useFetch'
+import useFetch from '../../hooks/useFetch'
 import * as S from './styles'
 
 const PropertyList = () => {
