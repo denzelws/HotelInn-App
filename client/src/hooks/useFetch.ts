@@ -4,6 +4,17 @@ import axios from 'axios'
 export type DataProps = {
   count: number
   type: string
+  _id: string
+  name: string
+  city: string
+  cheapestPrice: string
+  rating: number
+  photos: [string]
+  title: string
+  desc: string
+  rooms: string
+  address: string
+  distance: number
 }
 
 const useFetch = (url: string) => {

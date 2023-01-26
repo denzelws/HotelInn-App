@@ -6,6 +6,7 @@ import Header from '../Header'
 
 import NavBar from '../NavBar'
 import SearchList from '../SearchList'
+import useFetch from '../../hooks/useFetch'
 
 import * as S from './styles'
 
@@ -16,6 +17,8 @@ const List = () => {
   const [date, setDate] = useState(location.state.date)
   const [openDate, setOpenDate] = useState(false)
   const [options, setOptions] = useState(location.state.options)
+
+  const { data, loading, error } = useFetch(`/api/hotels?city=${destination}`)
 
   return (
     <div>
@@ -79,16 +82,14 @@ const List = () => {
             <button>Pesquisar</button>
           </S.ListSearch>
           <S.ListResult>
-            <SearchList />
-            <SearchList />
-            <SearchList />
-            <SearchList />
-            <SearchList />
-            <SearchList />
-            <SearchList />
-            <SearchList />
-            <SearchList />
-            <SearchList />
+            {loading ? (
+              'Carregando espere...'
+            ) : (
+              <>
+                {!!data &&
+                  data.map((item) => <SearchList key={item._id} item={item} />)}
+              </>
+            )}
           </S.ListResult>
         </S.Wrapper>
       </S.Container>

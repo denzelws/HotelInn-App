@@ -23,7 +23,7 @@ export const DescriptionBox = styled.div`
   flex: 2;
 `
 
-export const Title = styled.h1`
+export const Name = styled.h1`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.xlarge};
     color: ${theme.colors.secondary};
