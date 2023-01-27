@@ -20,11 +20,20 @@ const List = () => {
   const [min, setMin] = useState<string | undefined>(undefined)
   const [max, setMax] = useState<string | undefined>(undefined)
 
-  const { data, loading, error } = useFetch(`/api/hotels?city=${destination}`)
+  const { data, loading, error, reFetchData } = useFetch(
+    `/api/hotels?city=${destination}&min=${min}&max=${max}`
+  )
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeMin = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMin(e.target.value)
+  }
+
+  const handleChangeMax = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMax(e.target.value)
+  }
+
+  const handleClick = () => {
+    reFetchData()
   }
 
   return (
@@ -61,14 +70,14 @@ const List = () => {
                 <S.OptionText>
                   Preço mín <small>por noite</small>
                 </S.OptionText>
-                <input type="text" onChange={handleChange} />
+                <input type="text" onChange={handleChangeMin} />
               </S.OptionItem>
 
               <S.OptionItem>
                 <S.OptionText>
                   Preço máx <small>por noite</small>
                 </S.OptionText>
-                <input type="text" onChange={handleChange} />
+                <input type="text" onChange={handleChangeMax} />
               </S.OptionItem>
 
               <S.OptionItem>
@@ -86,7 +95,7 @@ const List = () => {
                 <input type="number" min={1} placeholder={options.room} />
               </S.OptionItem>
             </S.ListSearchItem>
-            <button>Pesquisar</button>
+            <button onClick={handleClick}>Pesquisar</button>
           </S.ListSearch>
           <S.ListResult>
             {loading ? (
