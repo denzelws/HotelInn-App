@@ -1,24 +1,27 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-export type DataProps = {
-  count: number
-  type: string
+export interface IProps {
+  item: ItemProps
+}
+
+export type ItemProps = {
   _id: string
   name: string
+  type: string
   city: string
-  cheapestPrice: string
-  rating: number
+  address: string
+  distance: number
   photos: [string]
   title: string
   desc: string
-  rooms: string
-  address: string
-  distance: number
+  rooms: [string]
+  cheapestPrice: number
+  rating: number
 }
 
 const useFetch = (url: string) => {
-  const [data, setData] = useState<DataProps[]>([])
+  const [data, setData] = useState<ItemProps[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 

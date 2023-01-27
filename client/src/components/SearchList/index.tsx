@@ -1,9 +1,9 @@
 import * as S from './styles'
 
-import { DataProps } from '../../hooks/useFetch'
+import { IProps } from '../../hooks/useFetch'
 import { Link } from 'react-router-dom'
 
-const SearchList = ({ item }: DataProps) => {
+const SearchList = ({ item }: IProps) => {
   return (
     <S.SearchList>
       <img src={item.photos[0]} alt="" />
