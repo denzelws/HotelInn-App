@@ -17,8 +17,15 @@ const List = () => {
   const [date, setDate] = useState(location.state.date)
   const [openDate, setOpenDate] = useState(false)
   const [options, setOptions] = useState(location.state.options)
+  const [min, setMin] = useState<string | undefined>(undefined)
+  const [max, setMax] = useState<string | undefined>(undefined)
 
   const { data, loading, error } = useFetch(`/api/hotels?city=${destination}`)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMin(e.target.value)
+    setMax(e.target.value)
+  }
 
   return (
     <div>
@@ -54,14 +61,14 @@ const List = () => {
                 <S.OptionText>
                   Preço mín <small>por noite</small>
                 </S.OptionText>
-                <input type="text" />
+                <input type="text" onChange={handleChange} />
               </S.OptionItem>
 
               <S.OptionItem>
                 <S.OptionText>
                   Preço máx <small>por noite</small>
                 </S.OptionText>
-                <input type="text" />
+                <input type="text" onChange={handleChange} />
               </S.OptionItem>
 
               <S.OptionItem>
