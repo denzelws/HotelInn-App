@@ -33,6 +33,13 @@ export const Wrapper = styled.div`
   z-index: 1;
 `
 
+export const HotelContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`
+
 export const Container = styled.div`
   ${({ theme }) => css`
     margin-top: 2rem;

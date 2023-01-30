@@ -3,6 +3,7 @@ import axios from 'axios'
 
 export interface IProps {
   item: ItemProps
+  data: ItemProps
 }
 
 export type ItemProps = {
