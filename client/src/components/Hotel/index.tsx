@@ -44,7 +44,7 @@ const Hotel = ({ item }: IProps) => {
       {loading ? (
         'Carregando...'
       ) : (
-        <S.HotelContainer>
+        <>
           {open && (
             <S.Slider key={item._id}>
               <S.CircleFill onClick={() => setOpen(false)} />
@@ -127,7 +127,7 @@ const Hotel = ({ item }: IProps) => {
               <Footer />
             </S.HotelWrapper>
           </S.Container>
-        </S.HotelContainer>
+        </>
       )}
     </S.Wrapper>
   )

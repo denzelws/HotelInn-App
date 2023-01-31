@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 
 export const Mail = styled.div`
   ${({ theme }) => css`
-    width: 100%;
     margin-top: 5rem;
     background-color: ${theme.colors.primary};
     color: ${theme.colors.white};
