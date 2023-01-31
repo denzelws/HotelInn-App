@@ -1,3 +1,4 @@
+import { useReducer } from 'react'
 import { SearchContextState } from '../interfaces/interfaces'
 import { SearchContext } from './SearchContext'
 
@@ -16,6 +17,8 @@ type ProviderProps = {
 }
 
 const SearchContextProvider = ({ children }: ProviderProps) => {
+  const [state, dispatch] = useReducer()
+
   return <SearchContext.Provider value={{}}>{children}</SearchContext.Provider>
 }
 
