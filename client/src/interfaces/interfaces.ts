@@ -1,13 +1,19 @@
-export interface Date {
-  date: number
+export interface initialState {
+  city: string | undefined
+  dates: Date[] | []
+  options: {
+    adult: number | undefined
+    children: number | undefined
+    room: number | undefined
+  }
+  dispatch: React.Dispatch<Action>
 }
 
-export interface SearchContextState {
-  city: string
-  dates: Date[]
-  options: {
-    adult: number
-    children: number
-    room: number
-  }
+export interface Action {
+  type: string
+  payload: initialState
+}
+
+export interface SearchContextProviderProps {
+  children: React.ReactNode
 }

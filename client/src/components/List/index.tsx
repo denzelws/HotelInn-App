@@ -14,7 +14,7 @@ const List = () => {
   const location = useLocation()
 
   const [destination, setDestination] = useState(location.state.destination)
-  const [date, setDate] = useState(location.state.date)
+  const [dates, setDates] = useState(location.state.date)
   const [openDate, setOpenDate] = useState(false)
   const [options, setOptions] = useState(location.state.options)
   const [min, setMin] = useState<string | undefined>(undefined)
@@ -52,14 +52,14 @@ const List = () => {
             <S.ListSearchItem>
               <S.Label>Check-in - Check-out</S.Label>
               <S.Span onClick={() => setOpenDate(!openDate)}>{`${format(
-                date[0].startDate,
+                dates[0].startDate,
                 'dd/MM/yyyy'
-              )} até ${format(date[0].endDate, 'dd/MM/yyyy')}`}</S.Span>
+              )} até ${format(dates[0].endDate, 'dd/MM/yyyy')}`}</S.Span>
               {openDate && (
                 <DateRange
-                  onChange={(item: any) => setDate([item.selection])}
+                  onChange={(item: any) => setDates([item.selection])}
                   minDate={new Date()}
-                  ranges={date}
+                  ranges={dates}
                 />
               )}
             </S.ListSearchItem>

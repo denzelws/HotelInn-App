@@ -1,25 +1,23 @@
 import { useReducer } from 'react'
-import { SearchContextState } from '../interfaces/interfaces'
-import { SearchContext } from './SearchContext'
+import { SearchContextProviderProps } from '../interfaces/interfaces'
+import { INITIAL_STATE, SearchContext } from './SearchContext'
+import { SearchReducer } from './SearchReducer'
 
-export const INITIAL_STATE: SearchContextState = {
-  city: '',
-  dates: [],
-  options: {
-    adult: 0,
-    children: 0,
-    room: 0
-  }
+export const SearchContextProvider = ({
+  children
+}: SearchContextProviderProps) => {
+  const [state, dispatch] = useReducer(SearchReducer, INITIAL_STATE)
+
+  return (
+    <SearchContext.Provider
+      value={{
+        city: state.city,
+        dates: state.dates,
+        options: state.options,
+        dispatch
+      }}
+    >
+      {children}
+    </SearchContext.Provider>
+  )
 }
-
-type ProviderProps = {
-  children: JSX.Element | JSX.Element[]
-}
-
-const SearchContextProvider = ({ children }: ProviderProps) => {
-  const [state, dispatch] = useReducer()
-
-  return <SearchContext.Provider value={{}}>{children}</SearchContext.Provider>
-}
-
-export default SearchContextProvider

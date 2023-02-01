@@ -2,7 +2,7 @@ import Header from '../Header'
 import NavBar from '../NavBar'
 import * as S from './styles'
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { LocationDot as LocationIcon } from '@styled-icons/fa-solid/LocationDot'
 
@@ -11,6 +11,7 @@ import MailContact from '../MailContact'
 import Footer from '../Footer'
 import useFetch, { IProps, ItemProps } from '../../hooks/useFetch'
 import { useLocation } from 'react-router-dom'
+import { SearchContext } from '../../context/SearchContext'
 
 const Hotel = ({ item }: IProps) => {
   const location = useLocation().pathname
@@ -19,6 +20,10 @@ const Hotel = ({ item }: IProps) => {
   const [open, setOpen] = useState(false)
 
   const { data, loading, error } = useFetch(`/api/hotels/find/${id}`)
+
+  const { dates } = useContext(SearchContext)
+
+  console.log(dates)
 
   const handleOpen = (index: number) => {
     setSlideNumber(index)
