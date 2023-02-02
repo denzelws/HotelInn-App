@@ -1,48 +1,48 @@
-import React, { createContext, useEffect, useReducer } from 'react'
+import { createContext, useEffect, useReducer } from 'react'
 import {
   AuthAction,
   AuthContextProviderProps,
-  AuthState
+  AuthState,
+  IAuthContext
 } from '../interfaces/AuthInterfaces'
 
+const user = localStorage.getItem('user') as string | null
+
 export const INITIAL_STATE: AuthState = {
-  user: null,
+  user: user ? JSON.parse(user) : null,
   loading: false,
-  error: null
+  error: null,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  dispatch: () => {}
 }
 
-// export const AuthContext = React.createContext<AuthState>(INITIAL_STATE)
-
-export const AuthContext = createContext<{
-  state: AuthState
-  dispatch: React.Dispatch<AuthAction>
-}>({
-  state: INITIAL_STATE,
-  dispatch: () => null
-})
+export const AuthContext = createContext<IAuthContext>(INITIAL_STATE)
 
 export const AuthReducer = (state: AuthState, action: AuthAction) => {
   switch (action.type) {
     case 'LOGIN':
       return {
-        user: null,
+        ...state,
         loading: true,
         error: null
       }
     case 'LOGIN_SUCCESS':
       return {
+        ...state,
         user: action.payload,
         loading: false,
         error: null
       }
     case 'LOGIN_FAILURE':
       return {
+        ...state,
         user: null,
         loading: false,
         error: action.payload
       }
     case 'LOGOUT':
       return {
+        ...state,
         user: null,
         loading: false,
         error: null
@@ -62,7 +62,9 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   return (
     <AuthContext.Provider
       value={{
-        state,
+        user: state.user,
+        loading: state.loading,
+        error: state.error,
         dispatch
       }}
     >
