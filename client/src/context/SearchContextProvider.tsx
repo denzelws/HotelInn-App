@@ -11,7 +11,7 @@ export const SearchContextProvider = ({
   return (
     <SearchContext.Provider
       value={{
-        city: state.city,
+        destination: state.destination,
         dates: state.dates,
         options: state.options,
         dispatch

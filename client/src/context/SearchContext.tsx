@@ -2,7 +2,7 @@ import React from 'react'
 import { initialState } from '../interfaces/interfaces'
 
 export const INITIAL_STATE: initialState = {
-  city: undefined,
+  destination: undefined,
   dates: [],
   options: {
     adult: undefined,

@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { ThemeProvider } from 'styled-components'
-import SearchContextProvider from './context/SearchContextProvider'
+import { SearchContextProvider } from './context/SearchContextProvider'
+
 import App from './pages/App/App'
 
 import GlobalStyles from './styles/global'

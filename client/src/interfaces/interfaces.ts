@@ -1,18 +1,17 @@
 export interface initialState {
-  city: string | undefined
-  dates: Date[] | []
+  destination: string | undefined
+  dates: Array<{ startDate: Date; endDate: Date; key: string }> | []
   options: {
     adult: number | undefined
     children: number | undefined
     room: number | undefined
   }
-  dispatch: React.Dispatch<Action>
+  dispatch: any
 }
 
-export interface Action {
-  type: string
-  payload: initialState
-}
+export type Action =
+  | { type: 'NEW_SEARCH'; payload: initialState }
+  | { type: 'RESET_SEARCH' }
 
 export interface SearchContextProviderProps {
   children: React.ReactNode

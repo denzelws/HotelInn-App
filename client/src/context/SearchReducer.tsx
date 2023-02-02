@@ -4,7 +4,7 @@ import { INITIAL_STATE } from './SearchContext'
 export const SearchReducer = (state: initialState, action: Action) => {
   switch (action.type) {
     case 'NEW_SEARCH':
-      return action.payload
+      return { ...state, ...action.payload }
     case 'RESET_SEARCH':
       return INITIAL_STATE
     default:
