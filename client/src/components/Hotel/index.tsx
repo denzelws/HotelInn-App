@@ -21,9 +21,16 @@ const Hotel = ({ item }: IProps) => {
 
   const { data, loading, error } = useFetch(`/api/hotels/find/${id}`)
 
-  const { dates } = useContext(SearchContext)
+  const { dates, options } = useContext(SearchContext)
 
-  console.log(dates)
+  const milisecondsPerDay = 1000 * 60 * 60 * 24
+  const dayDifference = (date1: Date, date2: Date) => {
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime())
+    const diffDays = Math.ceil(timeDiff / milisecondsPerDay)
+    return diffDays
+  }
+
+  const daysBooked = dayDifference(dates[0].endDate, dates[0].startDate)
 
   const handleOpen = (index: number) => {
     setSlideNumber(index)
@@ -74,7 +81,7 @@ const Hotel = ({ item }: IProps) => {
               </S.HotelDistance>
 
               <S.HotelPrice>
-                Reserve uma estadia de valor superior a ${data.cheapestPrice} e
+                Reserve uma estadia de valor superior a R${data.cheapestPrice} e
                 receba um táxi gratuito do aeroporto
               </S.HotelPrice>
               <S.HotelImages>
@@ -122,7 +129,10 @@ const Hotel = ({ item }: IProps) => {
                     expecepcionais esta propriedade tem a avaliação de 9.8{' '}
                   </S.PriceDescription>
 
-                  <S.Price>$500(5 noites)</S.Price>
+                  <S.Price>
+                    R${daysBooked * options.room! * data.cheapestPrice}(
+                    {daysBooked} noites)
+                  </S.Price>
 
                   <CheckButton>Reserve agora</CheckButton>
                 </S.HotelDetailsPrice>
