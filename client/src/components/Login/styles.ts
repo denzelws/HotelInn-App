@@ -2,8 +2,18 @@ import styled, { css } from 'styled-components'
 
 import { Envelope } from '@styled-icons/boxicons-solid/Envelope'
 
+import { User } from '@styled-icons/boxicons-solid/User'
+
+import img from '../../images/imglogin.jpg'
+
 export const EnvelopeIcon = styled(Envelope)`
-  width: 2rem;
+  width: 2.5rem;
+  color: #7d2ae8;
+`
+
+export const UserIcon = styled(User)`
+  width: 2.5rem;
+  color: #7d2ae8;
 `
 
 export const Container = styled.div`
@@ -11,7 +21,6 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #7d2ae8;
 `
 
 export const ContainerForm = styled.div`
@@ -23,6 +32,27 @@ export const ContainerForm = styled.div`
     background-color: ${theme.colors.white};
     width: 50%;
     height: 100vh;
+  `}
+`
+
+export const Image = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-direction: column;
+  background-image: url(${img});
+  background-position: center center;
+  background-size: cover;
+  width: 50%;
+  height: 100vh;
+`
+
+export const Caption = styled.h1`
+  ${({ theme }) => css`
+    color: ${theme.colors.white};
+    font-size: ${theme.font.sizes.xlarge};
+    font-weight: ${theme.font.elevated};
   `}
 `
 
@@ -43,9 +73,12 @@ export const InputBox = styled.div`
 `
 
 export const ForgotPassword = styled.a`
-  cursor: pointer;
-  color: #0000ee;
-  margin-bottom: 1rem;
+  ${({ theme }) => css`
+    cursor: pointer;
+    color: #7d2ae8;
+    font-weight: ${theme.font.light};
+    margin-bottom: 1.5rem;
+  `}
 `
 
 export const ButtonBox = styled.div``
@@ -53,20 +86,28 @@ export const ButtonBox = styled.div``
 export const Input = styled.input`
   outline: none;
   font-size: 1.5rem;
+  border: none;
+  border-bottom: 0.2rem solid;
 `
 
 export const Button = styled.button`
   ${({ theme }) => css`
-    width: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10rem;
+    padding: 1.5rem 0;
     border: none;
     border-radius: 0.5rem;
-    background-color: #90e0ef;
+    background-color: #7d2ae8;
     height: 2.8rem;
     cursor: pointer;
     font-size: 1.5rem;
+    color: ${theme.colors.white};
+    font-weight: ${theme.font.elevated};
 
     &:hover {
-      background-color: #0077b6;
+      background-color: #5a189a;
       transition: 0.5s;
       color: ${theme.colors.white};
     }

@@ -43,7 +43,7 @@ const Login = () => {
         <S.Title>Login</S.Title>
         <S.InputBoxes>
           <S.InputBox>
-            <S.EnvelopeIcon />
+            <S.UserIcon />
             <S.Input
               type="text"
               placeholder="Insira seu usuário"
@@ -69,6 +69,8 @@ const Login = () => {
           {error && <span>{error.message}</span>}
         </S.ButtonBox>
       </S.ContainerForm>
+
+      <S.Image />
     </S.Container>
   )
 }
