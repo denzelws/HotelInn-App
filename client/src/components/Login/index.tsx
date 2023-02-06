@@ -53,7 +53,7 @@ const Login = () => {
           </S.InputBox>
 
           <S.InputBox>
-            <S.EnvelopeIcon />
+            <S.LockIcon />
             <S.Input
               type="text"
               placeholder="senha..."

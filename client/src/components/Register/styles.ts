@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 
 import { Envelope } from '@styled-icons/boxicons-solid/Envelope'
-import { Lock } from '@styled-icons/boxicons-solid/Lock'
 import { User } from '@styled-icons/boxicons-solid/User'
+import { Lock } from '@styled-icons/boxicons-solid/Lock'
 
 import img from '../../images/imglogin.jpg'
 
