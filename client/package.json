@@ -16,6 +16,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@styled-icons/bootstrap": "^10.47.0",
     "@styled-icons/boxicons-regular": "^10.47.0",
+    "@styled-icons/boxicons-solid": "^10.47.0",
     "@styled-icons/fa-solid": "^10.47.0",
     "axios": "^1.2.3",
     "date-fns": "^2.29.3",
