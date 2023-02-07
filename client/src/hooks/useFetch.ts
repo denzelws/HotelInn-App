@@ -17,7 +17,7 @@ export type ItemProps = {
   title: string
   desc: string
   rooms: [string]
-  cheapestPrice: number
+  cheapestPrice: undefined | number
   rating: number
 }
 

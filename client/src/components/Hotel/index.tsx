@@ -10,18 +10,26 @@ import { CheckButton } from '../SearchList/styles'
 import MailContact from '../MailContact'
 import Footer from '../Footer'
 import useFetch, { IProps, ItemProps } from '../../hooks/useFetch'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
+import { IAuthContext } from '../../interfaces/AuthInterfaces'
+import { AuthContext } from '../../context/AuthContext'
+import Reserve from '../Reserve'
 
 const Hotel = ({ item }: IProps) => {
   const location = useLocation().pathname
   const id = location.split('/')[2]
   const [slideNumber, setSlideNumber] = useState(0)
   const [open, setOpen] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
 
   const { data, loading, error } = useFetch(`/api/hotels/find/${id}`)
 
   const { dates, options } = useContext(SearchContext)
+
+  const { user } = useContext<IAuthContext>(AuthContext)
+
+  const navigate = useNavigate()
 
   const milisecondsPerDay = 1000 * 60 * 60 * 24
   const dayDifference = (date1: Date, date2: Date) => {
@@ -47,6 +55,14 @@ const Hotel = ({ item }: IProps) => {
     }
 
     setSlideNumber(newSlideNumber)
+  }
+
+  const handleClick = () => {
+    if (user) {
+      setOpenModal(true)
+    } else {
+      navigate('/login')
+    }
   }
 
   return (
@@ -134,7 +150,7 @@ const Hotel = ({ item }: IProps) => {
                     {daysBooked} noites)
                   </S.Price>
 
-                  <CheckButton>Reserve agora</CheckButton>
+                  <CheckButton onClick={handleClick}>Reserve agora</CheckButton>
                 </S.HotelDetailsPrice>
               </S.HotelDetails>
 
@@ -144,6 +160,7 @@ const Hotel = ({ item }: IProps) => {
           </S.Container>
         </>
       )}
+      {openModal && <Reserve setOpen={setOpen} hotelId={id} />}
     </S.Wrapper>
   )
 }

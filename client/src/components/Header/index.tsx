@@ -17,6 +17,8 @@ import 'react-date-range/dist/theme/default.css'
 import { format } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
+import { IAuthContext } from '../../interfaces/AuthInterfaces'
+import { AuthContext } from '../../context/AuthContext'
 
 type HeaderProps = {
   type?: string
@@ -41,6 +43,8 @@ const Header = ({ type, list }: HeaderProps) => {
   ])
 
   const navigate = useNavigate()
+
+  const { user } = useContext<IAuthContext>(AuthContext)
 
   const [openOptions, setOpenOptions] = useState(false)
 
@@ -105,7 +109,7 @@ const Header = ({ type, list }: HeaderProps) => {
               Receba descontos por suas viagens - adquira imediatos descontos de
               até 20% ou mais e ganhe uma conta grátis
             </S.Description>
-            <S.Button>Login/ Registre-se</S.Button>
+            {!user && <S.Button>Login/ Registre-se</S.Button>}
             <S.HeaderSearch>
               <S.SearchItem>
                 <FontAwesomeIcon icon={faBed} />
