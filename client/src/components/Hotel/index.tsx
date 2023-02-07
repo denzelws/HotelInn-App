@@ -160,7 +160,7 @@ const Hotel = ({ item }: IProps) => {
           </S.Container>
         </>
       )}
-      {openModal && <Reserve setOpen={setOpen} hotelId={id} />}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
     </S.Wrapper>
   )
 }

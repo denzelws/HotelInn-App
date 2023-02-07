@@ -1,5 +1,9 @@
 import { NextFunction, Request, Response } from "express"
+
+import { Document } from 'mongoose';
+
 import Hotel from "../models/Hotel"
+import Room from "../models/Room"
 
 interface CitiesQuery {
 cities: string
@@ -7,6 +11,37 @@ list: [cities: string]
 }
 
 type CitiesRequest = Request<{}, any, any, CitiesQuery>
+
+interface HotelDocument extends Document {
+      _id: string;
+      type: string;
+      desc: string;
+      name: string;
+      city: string;
+      address: string;
+      distance: string;
+      photos: string[];
+      title: string;
+      rooms: string[];
+      cheapestPrice: number;
+      featured: boolean;
+      rating?: number;
+    }
+
+    interface RoomDocument extends Document {
+      _id: string;
+      type: string;
+      desc: string;
+      name: string;
+      city: string;
+      address: string;
+      distance: string;
+      photos: string[];
+      title: string;
+      cheapestPrice: number;
+      featured: boolean;
+      rating?: number;
+    }
 
 export const createHotel = async (req: Request, res: Response, next: NextFunction) => {
 
@@ -72,3 +107,10 @@ export const countByType = async (req: CitiesRequest, res: Response, next: NextF
       ])
 }
 
+export const  getHotelRooms = async (req: Request, res: Response, next: NextFunction) => {
+      const hotel = await Hotel.findById(req.params.id) as unknown as HotelDocument
+      const list = await Promise.all(hotel.rooms.map( async (room) => {
+            return Room.findById(room) as RoomDocument
+      }))
+      res.status(200).json(list)
+}
