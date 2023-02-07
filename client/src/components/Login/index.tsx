@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
 import { IAuthContext } from '../../interfaces/AuthInterfaces'
 
@@ -17,8 +18,9 @@ const Login = () => {
     password: undefined
   })
 
-  const { user, loading, error, dispatch } =
-    useContext<IAuthContext>(AuthContext)
+  const { loading, error, dispatch } = useContext<IAuthContext>(AuthContext)
+
+  const navigate = useNavigate()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }))
@@ -30,12 +32,11 @@ const Login = () => {
     try {
       const res = await axios.post('/api/auth/login', credentials)
       dispatch({ type: 'LOGIN_SUCCESS', payload: res.data })
+      navigate('/')
     } catch (err: any) {
       dispatch({ type: 'LOGIN_FAILURE', payload: err.response.data })
     }
   }
-
-  console.log(user)
 
   return (
     <S.Container>
@@ -65,7 +66,9 @@ const Login = () => {
         <S.ForgotPassword>Esqueceu sua senha?</S.ForgotPassword>
 
         <S.ButtonBox>
-          <S.Button onClick={handleLogin}>Entrar</S.Button>
+          <S.Button disabled={loading} onClick={handleLogin}>
+            Entrar
+          </S.Button>
           {error && <span>{error.message}</span>}
         </S.ButtonBox>
       </S.ContainerForm>

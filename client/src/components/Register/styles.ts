@@ -67,6 +67,10 @@ export const InputBoxes = styled.div`
 
 export const InputBox = styled.div`
   padding: 1.2rem 3rem;
+
+  > svg {
+    margin-right: 0.3rem;
+  }
 `
 
 export const ForgotPassword = styled.a`
