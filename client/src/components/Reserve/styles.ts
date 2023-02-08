@@ -13,6 +13,8 @@ export const Caption = styled.span``
 
 export const ReserveItem = styled.div``
 
+export const RButton = styled.button``
+
 export const ItemInfo = styled.div``
 
 export const Title = styled.div``

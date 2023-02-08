@@ -1,9 +1,10 @@
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react'
 
 import { XCircle as XIcon } from '@styled-icons/heroicons-solid/XCircle'
 
 import * as S from './styles'
 import useFetch, { ItemProps, RoomNumber } from '../../hooks/useFetch'
+import { SearchContext } from '../../context/SearchContext'
 
 type ReserveProps = {
   setOpen: Dispatch<SetStateAction<boolean>>
@@ -13,6 +14,27 @@ type ReserveProps = {
 const Reserve = ({ setOpen, hotelId }: ReserveProps) => {
   const [selectedRooms, setSelectedRooms] = useState<string[]>([])
   const { data, loading, error } = useFetch(`/api/hotels/room/${hotelId}`)
+  const { dates } = useContext(SearchContext)
+
+  const getDatesRange = (startDate: string, endDate: string): Date[] => {
+    const start = new Date(startDate)
+    const end = new Date(endDate)
+
+    const date = new Date(start.getTime())
+
+    const dates: Date[] = []
+
+    while (date <= end) {
+      dates.push(new Date(date))
+      date.setDate(date.getDate() + 1)
+    }
+
+    return dates
+  }
+
+  console.log(
+    getDatesRange(dates[0].startDate.toString(), dates[0].endDate.toString())
+  )
 
   const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked
@@ -24,7 +46,7 @@ const Reserve = ({ setOpen, hotelId }: ReserveProps) => {
     )
   }
 
-  console.log('Value of selectedRooms:', selectedRooms)
+  const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {}
 
   return (
     <S.Wrapper>
@@ -51,6 +73,7 @@ const Reserve = ({ setOpen, hotelId }: ReserveProps) => {
             </S.ItemInfo>
           </S.ReserveItem>
         ))}
+        <S.RButton onClick={handleClick}>Reserve agora!</S.RButton>
       </S.Container>
     </S.Wrapper>
   )
