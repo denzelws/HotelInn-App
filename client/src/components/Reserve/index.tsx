@@ -10,23 +10,13 @@ type ReserveProps = {
   hotelId: string
 }
 
-export type Room = {
-  _id: string
-  title: string
-  desc: string
-  maxPeople: string
-  price: number
-  roomNumbers: RoomNumber[]
-}
-
 const Reserve = ({ setOpen, hotelId }: ReserveProps) => {
-  const [selectedRooms, setSelectedRooms] = useState<Room[]>([])
+  const [selectedRooms, setSelectedRooms] = useState<string[]>([])
   const { data, loading, error } = useFetch(`/api/hotels/room/${hotelId}`)
 
   const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked
     const value = e.target.value
-    console.log('Value of data', data)
     setSelectedRooms(
       checked
         ? [...selectedRooms, value]
