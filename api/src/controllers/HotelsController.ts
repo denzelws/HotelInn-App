@@ -110,7 +110,7 @@ export const countByType = async (req: CitiesRequest, res: Response, next: NextF
 export const  getHotelRooms = async (req: Request, res: Response, next: NextFunction) => {
       const hotel = await Hotel.findById(req.params.id) as unknown as HotelDocument
       const list = await Promise.all(hotel.rooms.map( async (room) => {
-            return Room.findById(room) as RoomDocument
+            return await Room.findById(room) as RoomDocument
       }))
       res.status(200).json(list)
 }

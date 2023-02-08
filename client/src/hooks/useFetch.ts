@@ -6,6 +6,11 @@ export interface IProps {
   data: ItemProps
 }
 
+export type RoomNumber = {
+  number: number
+  _id: string
+}
+
 export type ItemProps = {
   _id: string
   name: string
@@ -19,6 +24,9 @@ export type ItemProps = {
   rooms: [string]
   cheapestPrice: undefined | number
   rating: number
+  maxPeople: string
+  price: number
+  roomNumbers: RoomNumber[]
 }
 
 const useFetch = (url: string) => {
