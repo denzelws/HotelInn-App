@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Room } from '../components/Reserve'
 
 export interface IProps {
   item: ItemProps
@@ -21,8 +22,8 @@ export type ItemProps = {
   photos: [string]
   title: string
   desc: string
-  rooms: [string]
-  cheapestPrice: undefined | number
+  rooms: Room[]
+  cheapestPrice: number | undefined
   rating: number
   maxPeople: string
   price: number

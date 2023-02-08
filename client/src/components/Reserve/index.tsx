@@ -10,7 +10,7 @@ type ReserveProps = {
   hotelId: string
 }
 
-type Room = {
+export type Room = {
   _id: string
   title: string
   desc: string
@@ -26,13 +26,28 @@ const Reserve = ({ setOpen, hotelId }: ReserveProps) => {
   const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked
     const value = e.target.value
+    console.log(
+      'Before flat',
+      data?.map((item: ItemProps) => item.rooms)
+    )
+    const room = data
+      ?.map((item: ItemProps) => item.rooms)
+      .flat()
+      .find((room: Room) => room && room._id === value)
+    console.log(
+      'After flat',
+      data?.map((item: ItemProps) => item.rooms)
+    )
     setSelectedRooms(
       checked
-        ? [...selectedRooms, value]
-        : selectedRooms.filter((item) => item !== value)
+        ? room
+          ? [...selectedRooms, room]
+          : selectedRooms
+        : selectedRooms.filter((room) => room._id !== value)
     )
   }
 
+  console.log(selectedRooms)
   return (
     <S.Wrapper>
       <S.Container>
