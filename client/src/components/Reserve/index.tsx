@@ -60,7 +60,7 @@ const Reserve = ({ setOpen, hotelId }: ReserveProps) => {
     )
   }
 
-  const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {}
+  const handleClick = async (e: React.MouseEvent<HTMLInputElement>) => {}
 
   return (
     <S.Wrapper>
@@ -74,6 +74,8 @@ const Reserve = ({ setOpen, hotelId }: ReserveProps) => {
               <S.Desc>{item.desc}</S.Desc>
               <S.ReserveMax>Maxímo de pessoas: {item.maxPeople}</S.ReserveMax>
               <S.Price>{item.price}</S.Price>
+            </S.ItemInfo>
+            <S.SelectedRooms>
               {item.roomNumbers.map((roomNumber: RoomNumber) => (
                 <S.Room key={roomNumber._id}>
                   <S.Label>{roomNumber.number}</S.Label>
@@ -85,7 +87,7 @@ const Reserve = ({ setOpen, hotelId }: ReserveProps) => {
                   />
                 </S.Room>
               ))}
-            </S.ItemInfo>
+            </S.SelectedRooms>
           </S.ReserveItem>
         ))}
         <S.RButton onClick={handleClick}>Reserve agora!</S.RButton>
