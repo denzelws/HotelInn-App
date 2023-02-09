@@ -6,6 +6,7 @@ import {
   faPlane,
   faTaxi
 } from '@fortawesome/free-solid-svg-icons'
+
 import { useContext, useState } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -25,12 +26,6 @@ type HeaderProps = {
   list?: boolean
 }
 
-interface OptionProps {
-  adult: number
-  children: number
-  room: number
-}
-
 const Header = ({ type, list }: HeaderProps) => {
   const [destination, setDestination] = useState('')
   const [openDate, setOpenDate] = useState(false)
@@ -48,7 +43,7 @@ const Header = ({ type, list }: HeaderProps) => {
 
   const [openOptions, setOpenOptions] = useState(false)
 
-  const [options, setOptions]: any = useState({
+  const [options, setOptions] = useState<Record<string, number>>({
     adult: 1,
     children: 0,
     room: 1
@@ -61,9 +56,8 @@ const Header = ({ type, list }: HeaderProps) => {
     navigate('/hotels', { state: { destination, dates, options } })
   }
 
-  const handleOption = (name: string, operation: string) => {
-    console.log(name)
-    setOptions((prev: OptionProps) => {
+  const handleOption = (name: string, operation: 'i' | 'd') => {
+    setOptions((prev) => {
       return {
         ...prev,
         [name]: operation === 'i' ? options[name] + 1 : options[name] - 1
