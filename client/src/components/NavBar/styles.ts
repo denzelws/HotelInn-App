@@ -1,6 +1,14 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 
+import { UserCircle } from '@styled-icons/boxicons-solid/UserCircle'
+
+export const UserIcon = styled(UserCircle)`
+  width: 2rem;
+  margin-right: 0.5rem;
+  margin-top: 0.3rem;
+`
+
 export const NavLink = styled(Link)`
   color: inherit;
   text-decoration: none;
@@ -12,6 +20,17 @@ export const Navbar = styled.nav`
     background-color: ${theme.colors.primary};
     display: flex;
     justify-content: center;
+  `}
+`
+
+export const UserBox = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const Username = styled.span`
+  ${({ theme }) => css`
+    font-weight: ${theme.font.higher};
   `}
 `
 
