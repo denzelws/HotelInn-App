@@ -6,6 +6,7 @@ import * as S from './styles'
 import useFetch, { ItemProps, RoomNumber } from '../../hooks/useFetch'
 import { SearchContext } from '../../context/SearchContext'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 type ReserveProps = {
   setOpen: Dispatch<SetStateAction<boolean>>
@@ -14,6 +15,7 @@ type ReserveProps = {
 
 const Reserve = ({ setOpen, hotelId }: ReserveProps) => {
   const [selectedRooms, setSelectedRooms] = useState<string[]>([])
+  const navigate = useNavigate()
   const { data, loading, error } = useFetch(`/api/hotels/room/${hotelId}`)
   const { dates } = useContext(SearchContext)
 
@@ -61,12 +63,18 @@ const Reserve = ({ setOpen, hotelId }: ReserveProps) => {
     )
   }
 
-  const handleClick = async () => {
-    await Promise.all(selectedRooms)
-    const res = await axios.put(`/api/room/availability/${selectedRooms}`, {
-      dates: allDates
-    })
-    return res.data
+  const handleClick = async (): Promise<void> => {
+    await Promise.all(
+      selectedRooms.map(async (roomId: string) => {
+        const res = await axios.put(`/api/rooms/availability/${roomId}`, {
+          dates: allDates
+        })
+        return res.data
+      })
+    )
+
+    setOpen(false)
+    navigate('/')
   }
 
   return (
