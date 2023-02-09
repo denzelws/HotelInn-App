@@ -25,16 +25,30 @@ const Reserve = ({ setOpen, hotelId }: ReserveProps) => {
     const dates: Date[] = []
 
     while (date <= end) {
-      dates.push(new Date(date))
+      const dateAsNumber = date.getTime()
+      const dateAsString = new Date(dateAsNumber).toString()
+      dates.push(new Date(dateAsString))
       date.setDate(date.getDate() + 1)
     }
 
     return dates
   }
 
-  console.log(
-    getDatesRange(dates[0].startDate.toString(), dates[0].endDate.toString())
+  const allDates = getDatesRange(
+    dates[0].startDate.toString(),
+    dates[0].endDate.toString()
   )
+
+  const isAvailable = (roomNumber: RoomNumber) => {
+    const isFound = roomNumber.unavailableDates.some((date: Date) => {
+      const dateAsDate = new Date(date)
+      return allDates.some(
+        (allDate: Date) => allDate.getTime() === dateAsDate.getTime()
+      )
+    })
+
+    return !isFound
+  }
 
   const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked
@@ -67,6 +81,7 @@ const Reserve = ({ setOpen, hotelId }: ReserveProps) => {
                     type="checkbox"
                     value={roomNumber._id}
                     onChange={handleSelect}
+                    disabled={!isAvailable(roomNumber)}
                   />
                 </S.Room>
               ))}
