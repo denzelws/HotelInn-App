@@ -5,6 +5,7 @@ import { XCircle as XIcon } from '@styled-icons/heroicons-solid/XCircle'
 import * as S from './styles'
 import useFetch, { ItemProps, RoomNumber } from '../../hooks/useFetch'
 import { SearchContext } from '../../context/SearchContext'
+import axios from 'axios'
 
 type ReserveProps = {
   setOpen: Dispatch<SetStateAction<boolean>>
@@ -60,7 +61,13 @@ const Reserve = ({ setOpen, hotelId }: ReserveProps) => {
     )
   }
 
-  const handleClick = async (e: React.MouseEvent<HTMLInputElement>) => {}
+  const handleClick = async () => {
+    await Promise.all(selectedRooms)
+    const res = await axios.put(`/api/room/availability/${selectedRooms}`, {
+      dates: allDates
+    })
+    return res.data
+  }
 
   return (
     <S.Wrapper>
