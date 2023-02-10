@@ -20,6 +20,7 @@ import { useNavigate } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
 import { IAuthContext } from '../../interfaces/AuthInterfaces'
 import { AuthContext } from '../../context/AuthContext'
+import { RangeKeyDict } from 'react-date-range'
 
 type HeaderProps = {
   type?: string
@@ -63,6 +64,15 @@ const Header = ({ type, list }: HeaderProps) => {
         [name]: operation === 'i' ? options[name] + 1 : options[name] - 1
       }
     })
+  }
+
+  const handleChange = (rangesByKey: RangeKeyDict) => {
+    const newDates = Object.values(rangesByKey).map((range) => ({
+      startDate: range.startDate || new Date(),
+      endDate: range.endDate || new Date(),
+      key: range.key || 'selection'
+    }))
+    setDates(newDates)
   }
 
   return (
@@ -124,7 +134,7 @@ const Header = ({ type, list }: HeaderProps) => {
                   <S.DateCalendar
                     editableDateInputs={true}
                     minDate={new Date()}
-                    onChange={(item: any) => setDates([item.selection])}
+                    onChange={handleChange}
                     moveRangeOnFirstSelection={false}
                     ranges={dates}
                   />
