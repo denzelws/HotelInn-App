@@ -3,7 +3,6 @@ import axios from 'axios'
 
 export interface IProps {
   item: ItemProps
-  data: ItemProps
 }
 
 export type RoomNumber = {
@@ -27,10 +26,12 @@ export type ItemProps = {
   maxPeople: string
   price: number
   roomNumbers: RoomNumber[]
+  value: number
+  index: number
 }
 
 const useFetch = (url: string) => {
-  const [data, setData] = useState<ItemProps[]>([])
+  const [data, setData] = useState<ItemProps | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 

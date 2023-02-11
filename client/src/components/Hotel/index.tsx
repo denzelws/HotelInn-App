@@ -1,5 +1,6 @@
 import Header from '../Header'
 import NavBar from '../NavBar'
+
 import * as S from './styles'
 
 import { useContext, useState } from 'react'
@@ -9,7 +10,7 @@ import { LocationDot as LocationIcon } from '@styled-icons/fa-solid/LocationDot'
 import { CheckButton } from '../SearchList/styles'
 import MailContact from '../MailContact'
 import Footer from '../Footer'
-import useFetch, { IProps, ItemProps } from '../../hooks/useFetch'
+import useFetch, { IProps } from '../../hooks/useFetch'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
 import { IAuthContext } from '../../interfaces/AuthInterfaces'
@@ -23,7 +24,7 @@ const Hotel = ({ item }: IProps) => {
   const [open, setOpen] = useState(false)
   const [openModal, setOpenModal] = useState(false)
 
-  const { data, loading, error } = useFetch(`/api/hotels/find/${id}`)
+  const { data, loading } = useFetch(`/api/hotels/find/${id}`)
 
   const { dates, options } = useContext(SearchContext)
 
@@ -85,78 +86,88 @@ const Hotel = ({ item }: IProps) => {
           )}
 
           <S.Container>
-            <S.HotelWrapper>
-              <S.Title>{data.name}</S.Title>
-              <S.Address>
-                <LocationIcon />
-                <S.Distance>{data.address}</S.Distance>
-              </S.Address>
+            {data && (
+              <S.HotelWrapper>
+                <S.Title>{data.name}</S.Title>
+                <S.Address>
+                  <LocationIcon />
+                  <S.Distance>{data.address}</S.Distance>
+                </S.Address>
 
-              <S.HotelDistance>
-                Excelente localização - {data.distance} de distância
-              </S.HotelDistance>
+                <S.HotelDistance>
+                  Excelente localização - {data.distance} de distância
+                </S.HotelDistance>
 
-              <S.HotelPrice>
-                Reserve uma estadia de valor superior a R${data.cheapestPrice} e
-                receba um táxi gratuito do aeroporto
-              </S.HotelPrice>
-              <S.HotelImages>
-                {data.photos?.map((photo, index) => (
-                  <S.ImgWrapper key={index}>
-                    <img onClick={() => handleOpen(index)} src={photo} alt="" />
-                  </S.ImgWrapper>
-                ))}
-              </S.HotelImages>
-              <S.HotelDetails>
-                <S.HotelDetailsTexts>
-                  <S.HotelTitle>
-                    Experimente a melhor acomodação do bairro
-                  </S.HotelTitle>
-                  <S.HotelDesc>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Eveniet nobis animi dolorem, sint dicta impedit est
-                    consequatur asperiores soluta quam repellendus. Earum,
-                    voluptas sint! Voluptatem nostrum corrupti minus sed error
-                    harum nisi corporis, perspiciatis praesentium. Voluptas,
-                    atque magni sapiente suscipit est illum necessitatibus quas
-                    neque distinctio repudiandae deleniti in eligendi incidunt
-                    accusamus ducimus doloribus, facere rem molestias labore
-                    accusantium soluta et ratione a. Ea vero, natus tenetur
-                    atque accusamus repudiandae officiis voluptates laudantium
-                    quis deleniti. Atque explicabo dolor soluta voluptatum
-                    tempore ipsa natus pariatur distinctio veritatis provident
-                    voluptates, accusamus deleniti vel culpa tempora, quos
-                    maxime quas accusantium optio? Error aut corrupti id
-                    necessitatibus, facere distinctio alias? Dolorem, nemo
-                    numquam. Labore veniam molestias quis adipisci totam vero,
-                    modi facere. Eius magni harum sit ipsam, officia totam at
-                    debitis aut excepturi quo accusantium odit porro. Obcaecati
-                    consequatur culpa ipsa magnam recusandae mollitia illum
-                    saepe amet!
-                  </S.HotelDesc>
-                </S.HotelDetailsTexts>
+                <S.HotelPrice>
+                  Reserve uma estadia de valor superior a R${data.cheapestPrice}{' '}
+                  e receba um táxi gratuito do aeroporto
+                </S.HotelPrice>
+                <S.HotelImages>
+                  {data.photos?.map((photo, index) => (
+                    <S.ImgWrapper key={index}>
+                      <img
+                        onClick={() => handleOpen(index)}
+                        src={photo}
+                        alt=""
+                      />
+                    </S.ImgWrapper>
+                  ))}
+                </S.HotelImages>
+                <S.HotelDetails>
+                  <S.HotelDetailsTexts>
+                    <S.HotelTitle>
+                      Experimente a melhor acomodação do bairro
+                    </S.HotelTitle>
+                    <S.HotelDesc>
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Eveniet nobis animi dolorem, sint dicta impedit est
+                      consequatur asperiores soluta quam repellendus. Earum,
+                      voluptas sint! Voluptatem nostrum corrupti minus sed error
+                      harum nisi corporis, perspiciatis praesentium. Voluptas,
+                      atque magni sapiente suscipit est illum necessitatibus
+                      quas neque distinctio repudiandae deleniti in eligendi
+                      incidunt accusamus ducimus doloribus, facere rem molestias
+                      labore accusantium soluta et ratione a. Ea vero, natus
+                      tenetur atque accusamus repudiandae officiis voluptates
+                      laudantium quis deleniti. Atque explicabo dolor soluta
+                      voluptatum tempore ipsa natus pariatur distinctio
+                      veritatis provident voluptates, accusamus deleniti vel
+                      culpa tempora, quos maxime quas accusantium optio? Error
+                      aut corrupti id necessitatibus, facere distinctio alias?
+                      Dolorem, nemo numquam. Labore veniam molestias quis
+                      adipisci totam vero, modi facere. Eius magni harum sit
+                      ipsam, officia totam at debitis aut excepturi quo
+                      accusantium odit porro. Obcaecati consequatur culpa ipsa
+                      magnam recusandae mollitia illum saepe amet!
+                    </S.HotelDesc>
+                  </S.HotelDetailsTexts>
 
-                <S.HotelDetailsPrice>
-                  <S.PriceTitle>
-                    Perfeito para semanas consecutivas de estadia
-                  </S.PriceTitle>
-                  <S.PriceDescription>
-                    Localizado no coração da cidade, próximo a lugares
-                    expecepcionais esta propriedade tem a avaliação de 9.8{' '}
-                  </S.PriceDescription>
+                  <S.HotelDetailsPrice>
+                    <S.PriceTitle>
+                      Perfeito para semanas consecutivas de estadia
+                    </S.PriceTitle>
+                    <S.PriceDescription>
+                      Localizado no coração da cidade, próximo a lugares
+                      expecepcionais esta propriedade tem a avaliação de 9.8{' '}
+                    </S.PriceDescription>
 
-                  <S.Price>
-                    R${daysBooked * options.room! * data.cheapestPrice}(
-                    {daysBooked} noites)
-                  </S.Price>
+                    {data && data.cheapestPrice !== undefined && (
+                      <S.Price>
+                        R${daysBooked * options.room! * data.cheapestPrice}(
+                        {daysBooked} noites)
+                      </S.Price>
+                    )}
 
-                  <CheckButton onClick={handleClick}>Reserve agora</CheckButton>
-                </S.HotelDetailsPrice>
-              </S.HotelDetails>
+                    <CheckButton onClick={handleClick}>
+                      Reserve agora
+                    </CheckButton>
+                  </S.HotelDetailsPrice>
+                </S.HotelDetails>
 
-              <MailContact />
-              <Footer />
-            </S.HotelWrapper>
+                <MailContact />
+                <Footer />
+              </S.HotelWrapper>
+            )}
           </S.Container>
         </>
       )}
