@@ -151,12 +151,14 @@ const Hotel = ({ item }: IProps) => {
                       expecepcionais esta propriedade tem a avaliação de 9.8{' '}
                     </S.PriceDescription>
 
-                    {data && data.cheapestPrice !== undefined && (
-                      <S.Price>
-                        R${daysBooked * options.room! * data.cheapestPrice}(
-                        {daysBooked} noites)
-                      </S.Price>
-                    )}
+                    {data &&
+                      data.cheapestPrice !== undefined &&
+                      options.room && (
+                        <S.Price>
+                          R${daysBooked * options.room * data.cheapestPrice}(
+                          {daysBooked} noites)
+                        </S.Price>
+                      )}
 
                     <CheckButton onClick={handleClick}>
                       Reserve agora
