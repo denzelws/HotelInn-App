@@ -8,6 +8,8 @@ import NavBar from '../NavBar'
 import SearchList from '../SearchList'
 import useFetch from '../../hooks/useFetch'
 
+import { RangeKeyDict } from 'react-date-range'
+
 import * as S from './styles'
 
 const List = () => {
@@ -24,12 +26,23 @@ const List = () => {
     `/api/hotels?city=${destination}&min=${min}&max=${max}`
   )
 
+  const items = Array.isArray(data) ? data : []
+
   const handleChangeMin = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMin(e.target.value)
   }
 
   const handleChangeMax = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMax(e.target.value)
+  }
+
+  const handleChange = (rangesByKey: RangeKeyDict) => {
+    const newDates = Object.values(rangesByKey).map((range) => ({
+      startDate: range.startDate || new Date(),
+      endDate: range.endDate || new Date(),
+      key: range.key || 'selection'
+    }))
+    setDates(newDates)
   }
 
   const handleClick = () => {
@@ -61,7 +74,7 @@ const List = () => {
               </S.Span>
               {openDate && (
                 <DateRange
-                  onChange={(item: any) => setDates([item.selection])}
+                  onChange={handleChange}
                   minDate={new Date()}
                   ranges={dates}
                 />
@@ -104,10 +117,14 @@ const List = () => {
           <S.ListResult>
             {loading ? (
               'Carregando espere...'
+            ) : error ? (
+              'Erro ao carregar dados'
             ) : (
               <>
                 {!!data &&
-                  data.map((item) => <SearchList key={item._id} item={item} />)}
+                  items.map((item) => (
+                    <SearchList key={item._id} item={item} />
+                  ))}
               </>
             )}
           </S.ListResult>
