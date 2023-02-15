@@ -31,4 +31,11 @@ $ yarn install ( both folders )
 $ yarn start - for backend 
 $ yarn dev - for client
 ```
-    
+## Demonstração
+
+## Login/Register Pages
+
+![image](https://user-images.githubusercontent.com/101350793/219170536-59b0a904-29ac-4948-ba14-87db1f739379.png)![image](https://user-images.githubusercontent.com/101350793/219170796-99ecdf9b-86e6-4e4d-93f7-de6f6e1bdac2.png)
+
+
+
