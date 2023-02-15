@@ -19,7 +19,7 @@ Instale o projeto utilizando yarn ou npm
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/denzelws/HotelInn-App
+$ git clone https://github.com/denzelws/HotelInn-App.git
 
 # Go into the repository
 $ cd api and client
