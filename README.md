@@ -37,5 +37,11 @@ $ yarn dev - for client
 
 ![image](https://user-images.githubusercontent.com/101350793/219170536-59b0a904-29ac-4948-ba14-87db1f739379.png)![image](https://user-images.githubusercontent.com/101350793/219170796-99ecdf9b-86e6-4e4d-93f7-de6f6e1bdac2.png)
 
+## Home Page
+
+https://user-images.githubusercontent.com/101350793/219254416-479b93bf-62ce-41c7-b742-faf6ab5e236e.mp4
+
+
+
 
 
